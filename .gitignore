@@ -1,0 +1,17 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Test cache
+.pytest_cache/
+
+# Generated export files — recreate any time via "Export Documentation" in the menu
+exports/
+
+# Atomic-write temp files produced by save_data()
+*.tmp
+
+# Claude Code local editor settings
+.claude/

@@ -1,0 +1,64 @@
+{
+  "vlans": [
+    {
+      "id": 10,
+      "name": "Management",
+      "subnet": "10.0.10.0/24",
+      "purpose": "Network device management"
+    },
+    {
+      "id": 20,
+      "name": "Staff",
+      "subnet": "10.0.20.0/24",
+      "purpose": "Staff workstations and devices"
+    },
+    {
+      "id": 30,
+      "name": "Students",
+      "subnet": "10.0.30.0/24",
+      "purpose": "Student devices"
+    }
+  ],
+  "servers": [
+    {
+      "hostname": "dc01",
+      "ip": "10.0.10.10",
+      "role": "Domain Controller",
+      "location": "Server Room"
+    },
+    {
+      "hostname": "filesvr01",
+      "ip": "10.0.10.20",
+      "role": "File Server",
+      "location": "Server Room"
+    }
+  ],
+  "switches": [
+    {
+      "name": "core-sw-01",
+      "ip": "10.0.10.1",
+      "location": "Main IDF",
+      "uplink": "Firewall"
+    },
+    {
+      "name": "access-sw-01",
+      "ip": "10.0.10.2",
+      "location": "Building B IDF",
+      "uplink": "core-sw-01"
+    }
+  ],
+  "dhcp_scopes": [
+    {
+      "name": "Staff Scope",
+      "range": "10.0.20.50-10.0.20.200",
+      "gateway": "10.0.20.1",
+      "dns": "10.0.10.10"
+    },
+    {
+      "name": "Student Scope",
+      "range": "10.0.30.50-10.0.30.200",
+      "gateway": "10.0.30.1",
+      "dns": "10.0.10.10"
+    }
+  ]
+}

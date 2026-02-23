@@ -4,12 +4,28 @@ from __future__ import annotations
 
 import json
 import os
+import sys
 from pathlib import Path  # FIX [REVIEW 1.2, 1.3]: use pathlib for absolute path and atomic writes
 from typing import Any, TypedDict  # FIX [REVIEW 2.1]: removed Optional (now using int | None)
 
-# FIX [REVIEW 1.2]: Anchor DATA_FILE to this module's location so the tool
-# works correctly regardless of the working directory it is launched from.
-DATA_FILE: Path = Path(__file__).parent.parent / "data" / "network.json"
+
+def _resolve_data_file() -> Path:
+    """Return the network.json path.
+
+    When running as a PyInstaller-bundled executable (``sys.frozen`` is True),
+    the bundle extraction directory is read-only, so data is stored in the
+    user's writable AppData folder instead.  During normal Python execution the
+    file lives in the project ``data/`` directory as before.
+    """
+    if getattr(sys, "frozen", False):
+        appdata = os.environ.get("APPDATA", "")
+        base = Path(appdata) if appdata else Path.home() / "AppData" / "Roaming"
+        return base / "NetDoc" / "network.json"
+    # FIX [REVIEW 1.2]: Anchor to this module's location for script execution.
+    return Path(__file__).parent.parent / "data" / "network.json"
+
+
+DATA_FILE: Path = _resolve_data_file()
 
 
 # ---------------------------------------------------------------------------

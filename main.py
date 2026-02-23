@@ -1,10 +1,10 @@
 """Entry point for the Network Documentation Generator."""
 
-from modules.cli import run
+from modules.gui import run
 
 
 def main() -> None:
-    """Launch the CLI application."""
+    """Launch the GUI application."""
     run()
 
 

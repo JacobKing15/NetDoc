@@ -5,9 +5,9 @@
 
 **Network documentation that actually stays current.**
 
-NetDoc is a menu-driven CLI tool built for IT teams that need structured, exportable documentation of their network infrastructure — VLANs, servers, switches, and DHCP scopes — without the overhead of an enterprise platform or the chaos of a shared spreadsheet.
+NetDoc is a desktop GUI and CLI tool built for IT teams that need structured, exportable documentation of their network infrastructure — VLANs, servers, switches, and DHCP scopes — without the overhead of an enterprise platform or the chaos of a shared spreadsheet.
 
-It runs anywhere Python runs, requires no database, and exports clean markdown and HTML that can live in a wiki, a shared drive, or a Git repository.
+The GUI ships as a standalone Windows `.exe` (no Python required). It requires no database, and exports clean HTML and Markdown that can live in a wiki, a shared drive, or a Git repository.
 
 ---
 
@@ -19,9 +19,11 @@ Most network documentation lives in a decade-old spreadsheet nobody fully trusts
 
 ## Features
 
+- **Desktop GUI** — Tkinter-based Windows app, ships as a standalone `.exe`
 - **Structured data entry** for VLANs, servers, switches, and DHCP scopes
+- **One-click export** — writes `network_docs.html` and `network_docs.md` directly to your Documents folder
 - **Menu-driven CLI** — no flags to memorize, no RTFM required
-- **Dual export targets** — markdown (`.md`) for Git/wikis, HTML for local viewing or printing
+- **Dual export targets** — Markdown (`.md`) for Git/wikis, HTML for local viewing or printing
 - **Rich terminal output** using the `rich` library — color-coded tables, clean prompts
 - **Intentionally credential-free** — see [Security Note](#security-note)
 - **No database required** — data stored in structured JSON flat files
@@ -31,9 +33,14 @@ Most network documentation lives in a decade-old spreadsheet nobody fully trusts
 
 ## Requirements
 
+**Standalone exe (Windows)**
+- No dependencies — just run `NetDoc.exe`
+
+**Running from source / CLI**
 - Python 3.10 or higher
 - [`rich`](https://github.com/Textualize/rich) — terminal formatting
 - [`pytest`](https://docs.pytest.org/) — for running the test suite
+- [`pyinstaller`](https://pyinstaller.org/) — to rebuild the exe
 
 ---
 
@@ -58,6 +65,22 @@ python main.py
 ---
 
 ## Usage
+
+### Desktop GUI
+
+Launch `NetDoc.exe`. The main window presents buttons for each section (VLANs, Servers, Switches, DHCP Scopes). Click **Export Documentation** to write `network_docs.html` and `network_docs.md` to your Windows Documents folder in one step — no file picker, no path entry.
+
+To rebuild the exe from source:
+
+```bash
+pyinstaller --onefile --windowed --name NetDoc main.py
+```
+
+The output is `dist\NetDoc.exe`.
+
+---
+
+### CLI
 
 NetDoc opens to a main menu. All navigation is number-based — no commands to remember.
 
